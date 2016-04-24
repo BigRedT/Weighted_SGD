@@ -3,49 +3,45 @@ clear;
 
 %% Params
 N1 = 100;
-mu1 = [0, 15];
-sigma1 = [10, 0; 0, 10];
+mu1 = [0, 2];
+sigma1 = [10, 0; 0, 1];
 
 N2 = 100;
-mu2 = [0,-15];
-sigma2 = [10, 0; 0, 10];
+mu2 = [0,-2];
+sigma2 = [10, 0; 0, 1];
 
-C = 1;
+C = 0.01;
 max_iter = 10000;
 lrgd = 0.0001;
-tolgd = 1e-5;
 lambda = 0.5;
 
 %SGD Params
-w0 = [4; 7];
-tol = 1e-2;
+w0 = [1; 1];
+tol = 1e-5;
 
 %% Generate data
 [x, y] = gen_data(N1, N2, mu1, mu2, sigma1, sigma2, false);
 
 %% Find optimal solution by gradient descent
 disp('Gradient Descent')
-w_star = gradient_descent(x,y,C,lrgd,tolgd);
+w_star = gradient_descent(x,y,C,lrgd,tol);
 
 %% Find residual and learning rate
 residual = compute_residual(w_star, x, y, C);
 L = comp_L(x, C);
-
-lr_uniform = get_lr( L, tol, 1, residual );
-lr_fully_weighted = get_lr( L, tol, 0, residual );
-lr_partially_weighted = get_lr( L, tol, lambda, residual );
+lr = tol/(2*tol*max(L)+(2*residual));
 
 %% Run weighted sgd with uniform sampling
 disp('Uniform SGD')
-w_uniform = sgd(w0, w_star, x,y,C,lr_uniform,1,tol);
+w_uniform = sgd(w0, x,y,C,lr,1,tol);
 
 %% Run weighted sgd fully weighted sampling
 disp('Fully Weighted')
-w_fully_weighted = sgd(w0, w_star, x,y,C,lr_fully_weighted,0,tol);
+w_fully_weighted = sgd(w0, x,y,C,lr,0,tol);
 
 %% Run weighted sgd partially weighted sampling
 disp('Partially Weighted')
-w_partially_weighted = sgd(w0, w_star, x,y,C,lr_partially_weighted,lambda,tol);
+w_partially_weighted = sgd(w0, x,y,C,lr,lambda,tol);
 
 % Show solutions
 figure; hold on;
@@ -66,10 +62,9 @@ hold off;
 legend({'uniform','fully weighted','partially weighted'});
 
 % Compute k for sgd variants
-k_uniform = compute_k(w0, w_uniform(:,end), w_star, x, C, residual, 1);
-k_fully_weighted = compute_k(w0, w_fully_weighted(:,end), w_star, x, C, residual, 0);
-k_partially_weighted = compute_k(w0, w_partially_weighted(:,end), w_star, x, C, residual, lambda);
-
+% k_uniform = compute_k(w0, w_uniform, w_star, x, C, residual, 1);
+% k_fully_weighted = compute_k(w0, w_fully_weighted, w_star, x, C, residual, 0);
+% k_partially_weighted = compute_k(w0, w_partially_weighted, w_star, x, C, residual, lambda);
 % 
 % 
 % figure; hold on;
