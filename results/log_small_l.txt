@@ -1,0 +1,8 @@
+cent
+Itr# 19256 Tol: 9.9989e-06
+Uniform SGD
+Itr# 3290 Tol: 0.0095166
+Fully Weighted
+Itr# 13489 Tol: 0.0092786
+Partially Weighted
+Itr# 5833 Tol: 0.009967

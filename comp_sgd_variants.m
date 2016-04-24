@@ -17,11 +17,12 @@ tolgd = 1e-5;
 lambda = 0.5;
 
 %SGD Params
-w0 = [4; 7];
+w0 = [1; 1];
 tol = 1e-2;
 
 %% Generate data
 [x, y] = gen_data(N1, N2, mu1, mu2, sigma1, sigma2, false);
+x = x./10;
 
 %% Find optimal solution by gradient descent
 disp('Gradient Descent')
