@@ -14,7 +14,7 @@ C = 1;
 max_iter = 10000;
 lrgd = 0.0001;
 tolgd = 1e-5;
-lambdas = [0.1:0.1:0.9];
+lambdas = [0.2:0.2:0.9];
 
 %SGD Params
 w0 = [1; 1];
@@ -73,7 +73,7 @@ plot_sol(w_star,x,'k');
 plot_sol(w_uniform(:,end),x,'r')
 plot_sol(w_fully_weighted(:,end),x,'g');
 legendsol = {'pos','neg','optimal','uniform','fully weighted','partially weighted'};
-colors = ['cmywkrgbcmywkrgb'];
+colors = ['kcmbgrkcmbgr'];
 for i = 1:numel(lambdas)
     curr_w_partially_weighted = w_partially_weighted{i};
     plot_sol(curr_w_partially_weighted(:,end),x,['-.', colors(i)]);
@@ -85,8 +85,8 @@ set(gca, 'fontsize', 16);
 
 % Plot convergence
 figure; hold on;
-plot_convergence(w_uniform, w_star, 'r');
-plot_convergence(w_fully_weighted, w_star, 'g');
+plot_convergence(w_uniform, w_star, 'r', true);
+plot_convergence(w_fully_weighted, w_star, 'g', true);
 legendconv = {'uniform','fully weighted','partially weighted'};
 for i = 1:numel(lambdas)
     curr_w_partially_weighted = w_partially_weighted{i};

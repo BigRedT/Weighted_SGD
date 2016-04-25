@@ -8,7 +8,7 @@ L = comp_L(x, C);
 p = lambda + (1-lambda)*L/(mean(L));
 w_sol = [];
 
-while curr_tol > tol
+while curr_tol > tol & k < 10^5
     i = discretesample(p, 1);
     k = k + 1;
     w_new = w_old - (lr).*grad_f_i(w_old, x(i,:), y(i), C, N)/(p(i)+0.000001);

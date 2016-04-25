@@ -1,9 +1,0 @@
-Gradient Descent
-Itr# 19551 Tol: 9.9993e-06
-Uniform SGD
-Itr# 95158 Tol: 0.0099648
-Fully Weighted
-Itr# 48655 Tol: 0.009991
-Partially Weighted
-Itr# 89150 Tol: 0.0099993
-
