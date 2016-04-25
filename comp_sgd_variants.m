@@ -85,8 +85,8 @@ set(gca, 'fontsize', 16);
 
 % Plot convergence
 figure; hold on;
-plot_convergence(w_uniform, w_star, 'r', true);
 plot_convergence(w_fully_weighted, w_star, 'g', true);
+plot_convergence(w_uniform, w_star, 'r', true);
 legendconv = {'uniform','fully weighted','partially weighted'};
 for i = 1:numel(lambdas)
     curr_w_partially_weighted = w_partially_weighted{i};
